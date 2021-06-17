@@ -40,6 +40,6 @@ let query = connection.query('SELECT emp_no, first_name, last_name FROM employee
     console.log('Sucesso!');
     connection.end();
 
-});//o .query equivale a digitar um comando query no DB.
+});//o .query equivale a digitar um comando query no DB
 
 query.stream({highWaterMark: 5}).pipe(updateStream);//Este stream criado aqui é somente leitura. Ele vai na base de dados, le os dados de 5 em 5 e colocando no buffer. O highWaterMark: 5 é o tamanho do nosso buffer. Cada vez que o sistema for no DB, ele vai trazer 5 rows. Quando dou o .pipe, eu pego o resultado deste stream e jogo em outro stream, que é a classe updateStream que criamos acima, o stream Transform, e aí sim faz a transformação que queremos e manda de volta. O .pipe já faz o callback.
